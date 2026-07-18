@@ -16,6 +16,7 @@ class MessageFieldBox extends StatelessWidget {
     );
 
     final inputDecoration = InputDecoration(
+      hintText: 'Termina tu mensaje con un "?"',
       enabledBorder: outlineInputBorder,
       focusedBorder: outlineInputBorder,
       filled: true,
@@ -27,7 +28,6 @@ class MessageFieldBox extends StatelessWidget {
           textController.clear();
         },
       ),
-      hintText: 'Escribe un mensaje',
     );
     
     return TextFormField(
