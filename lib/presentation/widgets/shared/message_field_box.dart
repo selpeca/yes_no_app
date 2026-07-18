@@ -7,6 +7,9 @@ class MessageFieldBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final textController = TextEditingController();
+    final focusNode = FocusNode();
+
     final outlineInputBorder = OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.circular(20),
@@ -19,23 +22,25 @@ class MessageFieldBox extends StatelessWidget {
       suffixIcon: IconButton(
         icon: const Icon(Icons.send_outlined),
         onPressed: () {
-          // Aquí puedes agregar la lógica para enviar el mensaje
-          print('Valor caja de texto  ');
+          final textValue = textController.value.text;
+          print('Valor caja de texto: $textValue');
+          textController.clear();
         },
       ),
       hintText: 'Escribe un mensaje',
     );
     
     return TextFormField(
-        decoration: inputDecoration,
-        onFieldSubmitted: (value) {
-          // Aquí puedes agregar la lógica para enviar el mensaje
-          print('Submitted value: $value');
-        },
-        onChanged: (value) {
-          // Aquí puedes agregar la lógica para manejar el cambio de texto
-          print('Changed value: $value');
-        },
+      onTapOutside: (event) => focusNode.unfocus(),
+      controller: textController,
+      decoration: inputDecoration,
+      focusNode: focusNode,
+      onFieldSubmitted: (value) {
+        // Aquí puedes agregar la lógica para enviar el mensaje
+        print('Submitted value: $value');
+        textController.clear();
+        focusNode.requestFocus();
+      },
       );
   }
 }
